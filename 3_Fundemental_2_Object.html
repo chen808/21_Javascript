@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+
+<head>
+</head>
+
+<body>
+
+<h1>Javascript Assignment #3: Object</h1>
+	<script>
+	var person = {}; // declaring a empty person object
+		person = {
+			name: 'Trey',
+			distance_traveled: 0,
+			say_name: person.name,
+			say_something: function(saying){
+				console.log("Trey says " + saying);
+			},
+			walk: function(){
+				console.log(person.name + " is walking");
+				person.distance_traveled += 3;
+			},
+			run: function(){
+				console.log(person.name + " is running");
+				person.distance_traveled += 10;
+			},
+			crawl: function(){
+				console.log(person.name + " is crawling");
+				person.distance_traveled += 1;
+			},
+			display_distance: function(){
+				console.log(person.name + " has traveled " + person.distance_traveled + " miles")
+			}
+		} //end of person object
+	
+	
+// invoking object
+person.walk(); // prints 'Trey is walking'
+person.crawl(); // prints 'Trey is crawling'
+person.display_distance(); // prints 'Trey has traveled 4 miles'
+person.run(); //prints 'Trey is running'
+person.display_distance(); // prints 'Trey has traveled 14 miles'
+
+
+	</script>
+
+
+</body>
+
+
+</html>
+
+
+
+
