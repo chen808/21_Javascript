@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+
+<head>
+</head>
+
+<body>
+
+<h1>Javascript Assignment #3: Object (Dojo Version)</h1>
+	<script>
+
+			var person = {
+
+				person_constructor: function(name){
+					person.name = name;
+				},
+
+				// initializing distance traveled
+				distance_traveled: 0,
+
+				// methods
+				say_something: function(saying){
+					console.log(person.name + " says " + saying);
+				},
+				walk: function(){
+					console.log(person.name + " is walking");
+					person.distance_traveled += 3;
+				},
+				run: function(){
+					console.log(person.name + " is running");
+					person.distance_traveled += 10;
+				},
+				crawl: function(){
+					console.log(person.name + " is crawling");
+					person.distance_traveled += 1;
+				},
+				display_distance: function(){
+					console.log(person.name + " has traveled " + person.distance_traveled + " miles")
+				}
+			} //end of person object
+
+
+			// adding another method outside of above object
+			person.gotsMoreToSay = function(){
+				console.log(person.name + " says Peace out!");
+			}
+
+
+			// creating a ninja class
+			var ninja = {
+
+				ninja_constructor: function(name, cohort){
+					ninja.name = name;
+					ninja.cohort = cohort;
+					ninja.belt_level = "yellow";
+				},
+
+				// methods
+				level_up: function(belt){
+					ninja.belt_level = belt;
+				},
+
+				display: function(){
+					console.log("Ninja name is: " + ninja.name + ", Cohort: " + ninja.cohort + " and belt level is " + ninja.belt_level)
+				}
+
+			}
+
+
+// invoking person object
+person.person_constructor("Gamora");
+person.say_something("Thanos is not my father!");
+person.walk();
+person.walk();
+person.gotsMoreToSay();
+person.display_distance();
+
+ninja.ninja_constructor("Shinobi", "San Jose");
+ninja.display();
+ninja.level_up("Black");
+ninja.display();	
+
+
+
+</script>
+
+
+</body>
+
+
+</html>
+
+
+
+

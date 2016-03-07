@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<head>
+</head>
+
+<body>
+
+<h1>Javascript Assignment: Creating Object 1</h1>
+<script type="text/javascript">
+	// creating constructor
+	function vehicleConstructor(name, numWheels, numPasssenger){
+		var vehicle = {};
+		vehicle.name = name;
+		vehicle.numWheels = numWheels;
+		vehicle.numPasssenger = numPasssenger;
+
+		vehicle.makeNoise = function(){
+			console.log("pew pew");
+			console.log("The " + vehicle.name + " has " + vehicle.numWheels + " wheels and is able to carry " + vehicle.numPasssenger + " humans.")
+		}
+		return vehicle;
+	}
+
+
+
+
+	//creating bike object
+	var bike = vehicleConstructor("Bike", 2, 2); // upon creation of bike, send the arguments up to vehicleConstructor
+
+	bike.makeNoise(); // invoke the vehicle.makeNoise method
+
+	// overwriting vehicle.makeNoise method
+	bike.makeNoise = function(){
+		console.log("ring ring");
+	}
+
+	bike.makeNoise(); // invokeing the bike.makeNoise method
+
+
+
+
+
+	// creating sedan object
+	var sedan = vehicleConstructor("Sedan", 4, 5);
+
+	sedan.makeNoise();
+
+	sedan.makeNoise = function(){
+		console.log("honk honk!");
+	}
+
+	sedan.makeNoise();
+
+
+
+
+	// creating bus object
+	var bus = vehicleConstructor("Bus", 6, 30);
+
+	console.log("The bus already has " + bus.numPasssenger + " passengers"); // initial passenger count
+	
+	// creating new method to add to passenger count
+	bus.pickUpPassengers = function(num){
+		bus.numPasssenger += num; //
+	}
+
+	bus.pickUpPassengers(10); // add 10 to existing passenger count
+
+	console.log(bus.numPasssenger); // passenger count should not be 40
+	
+</script>
+
+
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
