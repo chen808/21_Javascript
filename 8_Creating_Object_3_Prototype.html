@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+
+<head>
+</head>
+
+<body>
+
+<h1>Javascript Assignment: Creating Object 3 with prototype</h1>
+<script type="text/javascript">
+
+	// creating constructor
+	function VehicleConstructor(name, numWheels, numPasssenger, speed){
+		// ATTRIBUTES
+		this.name = name;
+		this.numWheels = numWheels;
+		this.numPasssenger = numPasssenger;
+		this.speed = speed;
+		this.vinNum = Math.floor( Math.random() * 1000000000 );
+
+
+		// PRIVATE VARIABLE DECLARED HERE
+		var self = this; // this is needed to keep track of 'this'
+		var distance_traveled = 0;
+
+		// PRIVATE METHOD DECLARED HERE
+		var privateVar = "Just checkin to see if this works from private method!"
+
+		var privateMethod = function(){
+			console.log("this is a method to call whatevas " + self.name);
+		}
+		var updateDistanceTravelled = function(){
+			distance_traveled += self.speed;
+		}
+
+
+		// PUBLIC METHOD ** can be accessed by objects **
+		VehicleConstructor.prototype.makeNoise = function(){
+			console.log("pew pew");
+			console.log("The " + self.name + " has " + self.numWheels + " wheels and is able to carry " + self.numPasssenger + " humans.");	
+			return this; // allows us to chain
+		}
+		VehicleConstructor.prototype.move = function(){
+			updateDistanceTravelled();
+			return this;
+		}
+		VehicleConstructor.prototype.checkMiles = function(){
+			console.log( "This " + self.name + " has totaled up " + distance_traveled + " miles!" );
+			return this;
+		}
+		VehicleConstructor.prototype.pickUpPassengers = function(passenger_count){
+			self.numPasssenger += passenger_count;
+			console.log("This bus now has " + self.numPasssenger + " passengers.");
+			return this;
+		}
+		VehicleConstructor.prototype.displayVin = function(){
+			console.log( self.name + " vin number is: " + self.vinNum);
+		}
+	}
+
+
+
+	// CREATING BIKE OBJECT
+	var Bikey = new VehicleConstructor("Bike", 2, 2, 80);
+
+	Bikey.move().move().move().checkMiles();
+	Bikey.displayVin();
+
+	Bikey.makeNoise = function(){
+		console.log("The "+  this.name +" makes a ring ring sound!")
+	}
+
+	Bikey.makeNoise(); // calls the overwrite makeNoise function
+
+
+
+	// // CREATING SEDAN OBJECT
+	var Sedan = new VehicleConstructor("Sedan", 4, 5, 60);
+
+	Sedan.makeNoise().move().move().checkMiles();
+	Sedan.displayVin();
+
+	Sedan.makeNoise = function(){
+		console.log("honk honk!")
+	}
+
+	Sedan.makeNoise(); // calls the overwrite makeNoise function
+
+
+
+
+	// CREATING BUS OBJECT
+	var Bus = new VehicleConstructor("Bus", 8, 20, 20);
+	console.log("The bus started off with " + Bus.numPasssenger);
+	// Bus.pickUpPassengers(10);
+	// Bus.pickUpPassengers(10);
+	Bus.pickUpPassengers(10).pickUpPassengers(10).displayVin();
+	Bus.makeNoise();
+
+
+</script>
+
+
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+

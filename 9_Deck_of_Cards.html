@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+
+<head>
+</head>
+
+<body>
+
+<h1>Javascript Assignment: Deck of Cards</h1>
+<script type="text/javascript">
+
+	// creating constructor
+	function DeckConstructor(playerName){
+		// ATTRIBUTES
+		this.playerName = playerName;
+		this.deckCount = 52;
+
+		console.log("Hello " + this.playerName);
+
+
+		// PRIVATE VARIABLE DECLARED HERE
+		var self = this;
+		
+		var card_number = ["Ace",1,2,3,4,5,6,7,8,9,10,"Jack","Queen","King"];
+		var shapes = ["heart", "diamond", "spade", "clubs"];
+		var full_deck = [];
+		var count = 0;
+
+	
+
+		// PRIVATE METHOD DECLARED HERE
+		var build_and_print_deck = function(){
+			for(var i=0; i<shapes.length; i++){
+				for(var x=0; x<card_number.length; x++){
+					full_deck.push( card_number[x] + " of " + shapes[i]);
+				}
+			}		
+		}
+
+		var print_deck = function(){
+		
+			for(var j=0; j<full_deck.length; j++){
+				 console.log(full_deck[j]);
+			}
+		}
+
+
+		var shuffle_deck = function(){
+			var m = full_deck.length, t, i;
+
+			// While there remain elements to shuffle…
+			while (m) {
+
+			// Pick a remaining element…
+			i = Math.floor(Math.random() * m--);
+
+			// And swap it with the current element.
+			t = full_deck[m];
+			full_deck[m] = full_deck[i];
+			full_deck[i] = t;
+			}
+			console.log("Shuffling the deck...")
+			return full_deck;
+		}
+
+
+
+		var initial_deal_cards = function(){
+				
+			randNum = full_deck[0];
+			full_deck.splice(randNum, 1);
+
+			console.log("Here is your card " + randNum);
+
+		}
+	
+
+
+		// PUBLIC METHOD ** can be accessed by objects **
+		DeckConstructor.prototype.build_deck = function(){
+			build_and_print_deck();
+			return self;
+		}
+
+		DeckConstructor.prototype.print_deck = function(){
+			print_deck();
+			return self;
+		}
+
+		DeckConstructor.prototype.shuffle_this_deck = function(){
+			shuffle_deck();
+			return self;
+		}
+
+		DeckConstructor.prototype.dealing_card = function(){
+			initial_deal_cards();
+			return self;
+		}
+
+	}
+
+
+	// CREATING BIKE OBJECT
+	var Mikey = new DeckConstructor("Mikey");
+	Mikey.build_deck();
+	Mikey.shuffle_this_deck().
+
+	
+</script>
+
+
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+

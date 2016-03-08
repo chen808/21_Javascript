@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+
+<head>
+</head>
+
+<body>
+
+<h1>Javascript Assignment: Creating Object 2 with private</h1>
+<script type="text/javascript">
+	// creating constructor
+	function VehicleConstructor(name, numWheels, numPasssenger, speed){
+		// ATTRIBUTES
+		this.name = name;
+		this.numWheels = numWheels;
+		this.numPasssenger = numPasssenger;
+		this.speed = speed;
+
+
+		// PRIVATE VARIABLE DECLARED HERE
+		var self = this; // this is needed to keep track of 'this'
+		var distance_traveled = 0;
+
+		// PRIVATE METHOD DECLARED HERE
+		var privateVar = "Just checkin to see if this works from private method!"
+
+		var privateMethod = function(){
+			console.log("this is a method to call whatevas " + self.name);
+		}
+		var updateDistanceTravelled = function(){
+			distance_traveled += self.speed;
+		}
+
+
+		// PUBLIC METHOD ** can be accessed by objects **
+		this.makeNoise = function(){
+			console.log("pew pew");
+			console.log("The " + self.name + " has " + self.numWheels + " wheels and is able to carry " + self.numPasssenger + " humans.");	
+		}
+		this.move = function(){
+			updateDistanceTravelled();
+		}
+		this.checkMiles = function(){
+			console.log( "This " + self.name + " has totaled up " + distance_traveled + " miles!" );
+		}
+		this.pickUpPassengers = function(passenger_count){
+			self.numPasssenger += passenger_count;
+			console.log("This bus now has " + self.numPasssenger + " passengers.");
+		}
+	}
+
+
+
+
+	// CREATING BIKE OBJECT
+	var Bikey = new VehicleConstructor("Bike", 2, 2, 80);
+
+	Bikey.move(); // increase the speed/distance traveled by 80+
+	Bikey.move(); // increase the speed/distance traveled by 80+
+	Bikey.checkMiles(); // should display totaled 160 miles
+
+	Bikey.makeNoise = function(){
+		console.log("ring ring!")
+	}
+
+	Bikey.makeNoise(); // calls the overwrite makeNoise function
+
+
+
+
+
+
+	// CREATING SEDAN OBJECT
+	var Sedan = new VehicleConstructor("Bike", 2, 2, 80);
+	Sedan.makeNoise();
+	Sedan.move(); // increase the speed/distance traveled by 80+
+	Sedan.move(); // increase the speed/distance traveled by 80+
+	Sedan.checkMiles(); // should display totaled 160 miles
+
+	Sedan.makeNoise = function(){
+		console.log("honk honk!")
+	}
+
+	Sedan.makeNoise(); // calls the overwrite makeNoise function
+
+
+
+
+
+	// CREATING BUS OBJECT
+	var Bus = new VehicleConstructor("Bus", 8, 20, 20);
+	console.log("The bus started off with " + Bus.numPasssenger);
+	Bus.pickUpPassengers(10);
+	Bus.pickUpPassengers(10);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+</script>
+
+
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
