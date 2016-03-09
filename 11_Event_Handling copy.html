@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+<head>
+</head>
+
+<body>
+
+<h1>Javascript Assignment: Event Handling (practice)</h1>
+
+<button id="someButton">Click to see what the Hulk says!</button>
+
+	<script type="text/javascript">
+		// get the button id of 'someButton'
+		var button = document.getElementById("someButton"); // store button element in the button variable so we can run methods on it
+
+
+		// Js method: 'addEventListener'
+		// takes in two parameters
+		// 1) the event to listen for
+		// 2) the list of instructions to run once event is triggered (callback)
+		button.addEventListener("click", whatToDoOnClick);
+
+		// DEFINE 'whatToDoOnClick' function
+		function whatToDoOnClick(){
+			alert("Hulk Smash!!!")
+		}
+
+	</script>
+
+
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+

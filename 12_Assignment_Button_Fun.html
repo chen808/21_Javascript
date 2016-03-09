@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+
+	<script>
+		// wait for html document to load then...
+		$(document).ready(function(){
+			// when button is clicked, the color will change to red
+			$( "#blueButton" ).click(function(){
+				var color = $(this).css("background-color", "red");
+			});
+
+
+			// hovering over the button will change it
+			$( "#blueButton" )
+				.on( "mouseenter", function(){
+				$(this).css({
+					"background-color": "green",
+					"font-weight": "bolder"
+				});
+			})
+				.on( "mouseleave", function(){
+				$(this).css({
+					"background-color": "",
+					"font-weight": ""
+				});
+			});
+
+			$(document).keypress(function(e){
+				if(e.which == 13){
+					// var addButton = $('<button type="button" value="OMG a button!"></button>')
+					// $("body").append(addButton);
+					var addButton = $('<button type="button" value="OMG a button!">Andrew at all the cookies!</button>')
+					$("body").append(addButton);
+
+				}
+			});
+
+		});// end of document.ready
+
+	</script>
+
+	<style>
+		button{
+			background-color: blue;
+			color: white;
+		}
+	</style>
+</head>
+
+<body>
+
+<h1>Javascript Assignment: Event Handling (practice)</h1>
+
+<button id="blueButton" align="center">Click to see what the Hulk says!</button>
+
+
+
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+
