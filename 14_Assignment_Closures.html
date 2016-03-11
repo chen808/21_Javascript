@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+
+	<script type="text/javascript">
+
+		function fib(){
+
+			var start = 0;
+			var next = 1;
+
+			function nacci(){
+				console.log(start);
+				var temp = next;
+				next += start;
+				start = temp;
+				
+			}
+			return nacci;
+		}
+
+		var fibCounter = fib();
+		fibCounter();
+		fibCounter();
+		fibCounter();
+		fibCounter();
+		fibCounter();
+		fibCounter();
+
+	</script>
+
+</head>
+
+<body>
+
+<h1>Javascript Assignment: Closures</h1>
+
+
+
+
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<script>
+
+		$(document).on("click", "button", function(){
+			 $.get("https://api.github.com/users/AndrewWibel", displayName);
+
+			 function displayName(data) {
+			 	console.log(data);
+				$("#gitInfo").append(data.login + " only made " + data.public_repos + " repos! So shitty!<br>") ;
+				$("#gitInfo").append(data.login + " last updated on " + data.updated_at);
+			}
+
+		})
+
+	</script>
+
+	<style>
+		button{
+			background-color: blue;
+			color: white;
+		}
+	</style>
+</head>
+
+<body>
+
+<h1>Javascript Assignment: Git Hub Api (practice)</h1>
+
+<button id="blueButton">Click to see Andrew's GitHub Info!!!!</button>
+
+<div id="gitInfo"></div>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+

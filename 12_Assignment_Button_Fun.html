@@ -9,13 +9,13 @@
 		// wait for html document to load then...
 		$(document).ready(function(){
 			// when button is clicked, the color will change to red
-			$( "#blueButton" ).click(function(){
-				var color = $(this).css("background-color", "red");
+			$( "button" ).click(function(){
+				$(this).toggleClass("red");
 			});
 
 
 			// hovering over the button will change it
-			$( "#blueButton" )
+			$( "button" )
 				.on( "mouseenter", function(){
 				$(this).css({
 					"background-color": "green",
@@ -44,9 +44,14 @@
 	</script>
 
 	<style>
+		.red{
+			background-color: red;
+		}
+		.blue{
+			background-color: blue;
+		}
 		button{
 			background-color: blue;
-			color: white;
 		}
 	</style>
 </head>
@@ -55,7 +60,7 @@
 
 <h1>Javascript Assignment: Event Handling (practice)</h1>
 
-<button id="blueButton" align="center">Click to see what the Hulk says!</button>
+<button>Click to see what the Hulk says!</button>
 
 
 
