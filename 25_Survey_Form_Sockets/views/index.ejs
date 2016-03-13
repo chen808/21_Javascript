@@ -1,0 +1,102 @@
+<html>
+<head>
+ <title></title>
+
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!-- need this for io.connect -->
+	<script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+			// this triggers the connection event in our server
+			var socket = io.connect();
+
+			// SOCKET.EMIT
+			// submitting data to server using emit
+			$('#survey_form').submit(function(e){
+				e.preventDefault();
+				// emitting
+				socket.emit("posting_form", {
+					// using .val to capture data from form
+					name: $('#name').val(),
+					location: $('#location').val(),
+					language: $('#faveLang').val(),
+					comment: $('#comment').val()
+				});
+			});
+
+
+			// SOCKET.ON
+			// this code will display when the server emits response called "updated_message" and "random_number"
+			socket.on('updated_message', function(data){
+				$('#message').html("You emitted the following infomation to the server: " + JSON.stringify(data.response));
+			});
+			socket.on('random_number', function(data){
+				$('#number').html("Your lucky number emitted by the server is : " + JSON.stringify(data.response));
+			});	
+		});
+
+	</script>
+
+
+</head>
+
+
+<body>
+
+	<div id="message"></div>
+	<div id="number"></div>
+
+ <form action='/result' method='post' class="col-md-3" id="survey_form">
+  	<h1>Coding Dojo Survey Form</h1>
+
+  	<!-- User enter name -->
+	<fieldset class="form-group">
+		<label for="name">Your Name: <input type="text" class="form-control" id="name" placeholder="Enter name" name="name"></label><br>
+		<small class="text-muted">We'll never share your email with anyone else.</small>
+	</fieldset>
+
+	<!-- Dojo Location -->
+	<label for='location'>Location:
+		<select name="location" id="location">
+			<option value="Oakland">Oakland</option>
+			<option value="Seattle">Seattle</option>
+			<option value="Honolulu">Honolulu</option>
+			<option value="New York">New York</option>
+		</select>
+	</label><br>
+
+
+	<!-- Favorite Language -->
+	<label for='faveLang'>Favorite:
+		<select name="faveLang" id="faveLang">
+			<option value="python">Python</option>
+			<option value="ruby">Ruby</option>
+			<option value="javascript">Javascript</option>
+		</select>
+	</label><br>
+
+
+	<!-- Comment Area -->
+	<fieldset class="form-group">
+		<label for="comments">Comment (optional)</label>
+		<textarea class="form-control" id="comments" rows="3" name="comment"></textarea>
+	</fieldset>
+
+	<!-- Submit Button -->
+	<button type="submit" class="btn btn-primary">Submit</button>
+
+ </form>
+</body>
+</html>

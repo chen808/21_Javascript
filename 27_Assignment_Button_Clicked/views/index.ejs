@@ -1,0 +1,93 @@
+<!-- Assignment 27 Button Clicked -->
+<!-- when user clicks on button, it updates count on same page -->
+<!-- when user clicks on reset, it changes the count back to zero -->
+<!-- this assignment also broadcast to EVERYONE including the one who started count -->
+<!doctype html>
+<html>
+<head>
+	<title>Assignment 27 Button Clicked</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!-- Need this for socket to work -->
+	<script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+
+			// this triggers the connection event in between index and server
+			var socket = io.connect();
+
+			// initialize count
+			var count = 0;
+
+			// listen when increase button is clicked
+			$("#increase_button").click(function(e){
+				// prevent page from loading another page
+				e.preventDefault();
+				count++;
+				socket.emit("increase_count", count);
+			});
+			$("#reset_button").click(function(e){
+				e.preventDefault();
+				socket.emit("reset_count", 0);
+			});
+
+
+
+			// recieving the info back from server.js
+			socket.on('update_count', function(data){
+				// target the span tag and update count
+				$('span').html(data.response);
+			});
+
+			socket.on('reset_counter', function(data){
+				$('span').html(data.response);
+			});
+
+
+		}); // end of document.read
+
+	</script>
+
+
+
+</head>
+<body align="center">
+	<div id="batman"><div>
+
+	<h1>This button has been pushed <span></span> time(s)</h1>
+	<h4>Push the button to update the count!</h4>
+
+
+	<!-- when user pushes this button, it increments the count -->
+	<button type="button" class="btn btn-primary large" id="increase_button">Increase the count</button><br>
+
+	<h4>Push this button to reset</h4>
+	<!-- when user pushes this button, it resets the count -->
+	<button type="button" class="btn btn-danger large" id="reset_button">Reset</button>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

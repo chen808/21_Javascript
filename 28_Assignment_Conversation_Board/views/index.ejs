@@ -1,0 +1,112 @@
+<!-- Assignment 28 Conversation Board -->
+<!doctype html>
+<html>
+<head>
+	<title>Conversation Board</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!-- need this for socket to work -->
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+
+	<!-- jQuery -->
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+			// triggers the connection event
+			var socket = io.connect();
+
+			// initial alert to get user's name
+			var current_user = prompt("Hey! What is your name??");
+
+			// emit(send) user to server.js
+			socket.emit("new_user", current_user);
+
+			$("#send_message").submit(function(){
+				socket.emit("current_user_new_message", {
+					message: $( '#messageThis' ).val()
+				});
+			});
+
+
+
+			// listening for 
+			socket.on("new_user_message", function(data){
+				$("#text").html(data.response + " has entered the holla room!!! What??");
+			});
+			socket.on("newMessage", function(data){
+				$("#message").html(data.response);
+			});
+
+		});
+
+
+	</script> <!-- end of jquery script -->
+
+	<style>
+		body{
+			margin: 0 auto;
+		}
+		#convo_box{
+			border: 1px solid black;
+			width: 400px;
+			height: 300px;
+		}
+		div#text{
+			color: gray;
+		}
+	</style>
+
+</head>
+
+
+<body>
+	<h1>Holla Holla Board!</h1>
+	<div id="convo_box" align="center">
+		<!-- Conversations -->
+		<div id="text"></div>
+		<div id="message"></div>
+	</div>
+	<form id="send_message">
+		<textarea class="form-control" id="messageThis" rows="3" name="messageThis"></textarea>
+
+		<button type="button" class="btn btn-success" id="sendButton">Send</button>
+	</form>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
