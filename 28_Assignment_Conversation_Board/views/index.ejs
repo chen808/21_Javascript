@@ -31,24 +31,25 @@
 			// emit(send) user to server.js
 			socket.emit("new_user", current_user);
 
-			$("#send_message").submit(function(){
-				socket.emit("current_user_new_message", {
-					message: $( '#messageThis' ).val()
-				});
-			});
+			// append messages to 
 
+
+			$("#sendButton").click(function(){
+				socket.emit("current_user_new_message",{ user: current_user, message: $( '#messageThis' ).val() })
+			});
 
 
 			// listening for 
 			socket.on("new_user_message", function(data){
-				$("#text").html(data.response + " has entered the holla room!!! What??");
+				$("#text").append(data.response + " has entered the holla room!!! What??<br>");
 			});
+
+
 			socket.on("newMessage", function(data){
-				$("#message").html(data.response);
+				$("#message").append("<h4>" + data.user + ": " + data.new_message + "</p>");
 			});
 
 		});
-
 
 	</script> <!-- end of jquery script -->
 
@@ -59,7 +60,7 @@
 		#convo_box{
 			border: 1px solid black;
 			width: 400px;
-			height: 300px;
+			border-radius: 3px;
 		}
 		div#text{
 			color: gray;
@@ -70,17 +71,25 @@
 
 
 <body>
+	<div id="container">
 	<h1>Holla Holla Board!</h1>
-	<div id="convo_box" align="center">
+
+	<div id="convo_box">
 		<!-- Conversations -->
 		<div id="text"></div>
-		<div id="message"></div>
+		<div id="message"></div><br>
 	</div>
-	<form id="send_message">
-		<textarea class="form-control" id="messageThis" rows="3" name="messageThis"></textarea>
 
+	
+		<input type="text" class="col-md-4" id="messageThis" placeholder="Type a message"><br>
+
+		<div>
 		<button type="button" class="btn btn-success" id="sendButton">Send</button>
-	</form>
+		</div>
+
+
+
+	</div>
 </body>
 
 </html>

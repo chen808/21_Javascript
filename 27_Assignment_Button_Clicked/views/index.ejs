@@ -37,6 +37,8 @@
 				count++;
 				socket.emit("increase_count", count);
 			});
+
+			// listening when reset button is clicked
 			$("#reset_button").click(function(e){
 				e.preventDefault();
 				socket.emit("reset_count", 0);

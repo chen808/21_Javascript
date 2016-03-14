@@ -44,17 +44,19 @@ var io = require('socket.io').listen(server);
 
 // IO.SOCKET>ON (this is where sockets listen for their event)
 io.sockets.on('connection', function(socket){
-
+	var messages = [];
 
 	// listen for "new_user"
 	socket.on("new_user", function(data){
 		// using io.emit to announce to everyone
 		io.emit("new_user_message", {response: data});
+
 	});
 
 	// listen for "current_user_message"
 	socket.on("current_user_new_message", function(data){
-		io.emit("newMessage", {response: data});
+		messages.push( {name:data.user, message: data.message} );
+		io.emit("newMessage", {new_message: data.message, user: data.user});
 	});
 
 
