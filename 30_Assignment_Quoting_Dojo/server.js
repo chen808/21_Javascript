@@ -1,6 +1,9 @@
-// 1) Run sudo mongod (start the mongo server)
-// 2) Run nodemon server.js
-// 3) Run mongo (start the database)
+// 30_Assignment_Quoting Dojo
+
+// 1) make sure all neccesary modules have been installed
+// 2) terminal > nodemon server.js
+// 3) terminal > sudo mongod (mongo server)
+// 4) terminal > sudo mongo (database)
 
 // REQUIRES
 // require express module
@@ -70,9 +73,6 @@ app.post('/users', function(request, respond){
 		}
 	});
 });
-
-
-
 
 
 

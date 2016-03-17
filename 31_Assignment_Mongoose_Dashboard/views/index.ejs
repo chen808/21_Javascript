@@ -1,3 +1,5 @@
+<!-- index.ejs -->
+
 <!doctype html>
 <html>
 <head>
@@ -17,34 +19,37 @@
 	<h1>Here are the mongooseeees!!!!</h1>
 	<a href="/to_new" class="btn btn-info" role="button">Create new Mongy!</a>
 
+	<!-- Displaying the mongoose -->
 	<table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Superpower</th>
-        <th>Action</th>
-      </tr>
-    </thead>
+	    <thead>
+	      <tr>
+	        <th>Name</th>
+	        <th>Superpower</th>
+	        <th>Action</th>
+	      </tr>
+	    </thead>
 
-	<tbody>
-	<% for(var x in mongies){ %>
+		<tbody>
+		<!-- START for loop -->
+		<% for(var x in mongies){ %>
 
-	<tr>
-	<td><%= mongies[x].name %></td>
-	<td><%= mongies[x].power %></td>
+		<tr>
+		<td><%= mongies[x].name %></td>
+		<td><%= mongies[x].power %></td>
 
-	<td>
-	<a href="/mongooses/<%= mongies[x].id %>/edit" class="btn btn-info" role="button">Edit</a>
-	<a href="/mongooses/<%= mongies[x].id %>" class="btn btn-success" role="button">Show</a>
-	<form action="/mongooses/<%= mongies[x].id %>/destroy" method="post" role="form" class="col-md-3">
-	<button class="btn btn-danger">Delete!</button>
-	</form>
-	</td>
+		<td>
+		<a href="/mongooses/<%= mongies[x].id %>/edit" class="btn btn-info" role="button">Edit</a>
+		<a href="/mongooses/<%= mongies[x].id %>" class="btn btn-success" role="button">Show</a>
+		<form action="/mongooses/<%= mongies[x].id %>/destroy" method="post" role="form" class="col-md-3">
+		<button class="btn btn-danger">Delete!</button>
+		</form>
+		</td>
 
-	</tr>
-	</tbody>
-	<% } %><!-- end for loop -->
-  </table>
+		</tr>
+		</tbody>
+		<% } %>
+		<!-- END for loop -->
+	</table>
 
 
 </body>

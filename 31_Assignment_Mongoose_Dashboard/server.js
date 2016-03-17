@@ -17,6 +17,7 @@ var path = require("path");
 mongoose.connect('mongodb://localhost/mongees');
 
 
+
 // SCHEMAS
 var MongySchema = new mongoose.Schema({
 	name:String,
@@ -24,9 +25,11 @@ var MongySchema = new mongoose.Schema({
 })
 
 
+
 // MODELS
 mongoose.model('Mongy', MongySchema);		// setting schema in our 'User' model
 var Mongy = mongoose.model('Mongy');		// retrieving this schema from our 'User' model
+
 
 
 // SETTINGS
@@ -47,16 +50,21 @@ app.get('/', function(req, res){
 	})
 })
 
+// 
 app.get('/mongooses/:id', function(req, res){
+	// first parameter is the query document. second is the callback
 	Mongy.findOne({_id: req.params.id}, function(err, mongy){
+		// load show.ejs and pass the mongy object to view
 		res.render('show', {mongies:mongy});
 	})
 })
 
+// route to new.ejs
 app.get('/to_new', function(req, res){
 	res.render('new');
 })
 
+// route to edit.ejs (find the info by id)
 app.get('/mongooses/:id/edit', function(req, res){
 
 	Mongy.findOne({_id: req.params.id}, function(err, mongy){
@@ -68,6 +76,7 @@ app.get('/mongooses/:id/edit', function(req, res){
 
 
 // POST
+// creating new
 app.post('/mongooses/new', function(req, res){
 	var mongy = new Mongy( {name:req.body.name, power:req.body.power} );
 	mongy.save(function(err){
@@ -81,17 +90,24 @@ app.post('/mongooses/new', function(req, res){
 	})
 })
 
+
+// updating
 app.post('/mongooses/:id', function(req, res){
 	Mongy.update({_id:req.params.id}, {name: req.body.name, power: req.body.power}, function(err,mongy){
 		res.redirect('/');
 	})
 })
 
+// deleting
 app.post('/mongooses/:id/destroy', function(req, res){
 	Mongy.remove({_id:req.params.id}, function(err, user){
 		res.redirect('/');
 	})
 })
+
+
+
+
 
 
 
